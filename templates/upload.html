@@ -1,0 +1,118 @@
+{% extends "header.html" %}
+{% block body %}
+
+<style>
+  form h2 {
+  font-size: 2.4em;
+  font-weight: 900;
+  margin-bottom: 40px;
+}
+form {
+  flex: 1;
+  width: 360px;
+  margin: 0 auto;
+  padding: 30px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  background: rgb(240, 196, 135);
+}
+
+form-ad {
+  flex: 1;
+  width: 50px;
+  margin: 0 auto;
+  /* padding: 30px; */
+  /* box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1); */
+  border-radius: 15px;
+  /* background: rgb(240, 196, 135); */
+}
+</style>
+
+<body>
+  <div style="display: flex;">
+    <form method="POST" enctype="multipart/form-data" style="flex: 1;">
+      <input type="file" name="files[]" multiple onchange="previewFiles()">
+      <!-- ... rest of the form elements ... -->
+      <select name="course">
+        <option value="MCA">MCA</option>
+        <option value="BTECH">B.Tech</option>
+        <option value="MTECH">M.Tech</option>
+        <option value="MSC">M.Sc</option>
+        <option value="MBA">MBA</option>
+      </select>
+      
+      <select name="subject">
+        <option value="PSP-Problem Solving and Programming">Problem Solving and Programming</option>
+        <option value="MFCA-Mathematical Foundations of Computer Applications">Mathematical Foundations of CA</option>
+        <option value="DLCO-Digital Logic and Computer Organization">Digital Logic and Computer Organization</option>
+        <option value="DSA-Data Structures and Applications">Data Structures and Applications</option>
+        <option value="OS-Operating Systems">Operating Systems</option>
+        <option value="PSLP-Problem Solving Lab using Python">Problem Solving Lab using Python</option>
+        <option value="DSLC-Data Structures Lab using C">Data Structures Lab using C</option>
+        <option value="DAA-Design and Analysis of Algorithms">Design and Analysis of Algorithms</option>
+        <option value="DBMS-Database Management Systems">Database Management Systems</option>
+        <option value="PSM-Probability and Statistical Methods">Probability and Statistical Methods</option>
+        <option value="OOP-Object Oriented Programming">Object Oriented Programming</option>
+        <option value="CN-Computer Networks">Computer Networks</option>
+        <option value="DBMSL-DBMS Lab">DBMS Lab</option>
+        <option value="CNL-Computer Networks Lab">Computer Networks Lab</option>
+        <option value="DMW-Data Mining and Warehousing">Data Mining and Warehousing</option>
+        <option value="CI-Computational Intelligence">Computational Intelligence</option>
+        <option value="SE-Software Engineering">Software Engineering</option>
+        <option value="AFM-Accounting and Financial Management">Accounting and Financial Management</option>
+        <option value="DML-Data Mining Lab">Data Mining Lab</option>
+        <option value="BC-Business Communication">Business Communication</option>
+        <option value="MLDL-Machine Learning and Deep Learning">Machine Learning and Deep Learning</option>
+        <option value="WTA-Web Technology and Its Applications">Web Technology and Its Applications</option>
+        <option value="PDC-Parallel and Distributed Computing">Parallel and Distributed Computing</option>
+        <option value="PW-Project Work - Phase I">Project Work - Phase I</option>
+        <option value="IS-Information Security">Information Security</option>
+        <option value="CC-Cloud Computing">Cloud Computing</option>
+        <option value="OB-Organizational Behaviour">Organizational Behaviour</option>
+        <option value="ISL-Information Security Lab">Information Security Lab</option>
+        <option value="CCL-Cloud Computing Lab">Cloud Computing Lab</option>
+    </select>
+    
+      
+
+      <input type="submit" value="Upload">
+      <!-- ... your select fields and submit button ... -->
+    </form>
+
+    <div id="preview" style="flex: 2; padding-left: 20px;">
+      <!-- Preview PDFs and images will be displayed here -->
+    </div>
+  </div>
+
+  <script>
+    function previewFiles() {
+      var preview = document.querySelector('#preview');
+      var files = document.querySelector('input[type=file]').files;
+
+      function readAndPreview(file) {
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+          if (/\.pdf$/i.test(file.name)) {
+            var iframe = document.createElement('iframe');
+            iframe.src = this.result;
+            iframe.type = "application/pdf";
+            iframe.width = "100%";
+            iframe.height = "500"; // Set a fixed height for preview PDFs
+            preview.appendChild(iframe);
+          }
+        }, false);
+
+        reader.readAsDataURL(file);
+      }
+
+      if (files) {
+        [].forEach.call(files, readAndPreview);
+      }
+    }
+  </script>
+
+</body>
+
+{% endblock %}
+

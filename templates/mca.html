@@ -1,0 +1,30 @@
+{% extends "header.html" %}
+{% block body %}
+
+<body>
+
+  <nav class="navbar1">
+    <h1> Lumos - MCA </h1>
+</nav>
+
+<!-- home -->
+
+<ul class="recipes">
+  
+  {% for subject in subjects %}
+  <li class="recipe">
+    <img src="static/smoothie.png" alt="{{ subject }} icon" >
+    <a href="{{ url_for('subject_page', subject_name=subject) }}">
+      <button class="button">
+          {{ subject }}
+      </button>
+  </a>
+  </li>
+  {% endfor %}
+
+</ul>
+
+</body>
+</html>
+
+{% endblock %}

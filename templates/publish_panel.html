@@ -1,0 +1,103 @@
+{% extends "header.html" %}
+{% block body %}
+
+<style>
+    .publish-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 16px;
+      text-align: left;
+      border: 1px solid #ddd;  /* Border for the table */
+  }
+  
+  .publish-table th, .publish-table td {
+      width: 33.33%;  /* Set each column to take up one-third of the table width */
+      padding: 10px 20px;
+      border: 1px solid #ddd;  /* Border for each cell */
+  }
+  
+  .publish-table th {
+      background-color: #9feada;
+      font-weight: bold;
+  }
+    
+  .publish-table button:hover {
+      background-color: #4e84e8;
+  }
+  
+  .action-buttons {
+      text-align: right;  /* Right-align the buttons */
+  }
+  .publish-table form {
+    display: flex;  /* Align items in a row */
+    align-items: center;  /* Vertically center the items */
+  }
+
+  .publish-table a {
+    text-decoration: none;  /* Remove underline from anchor tags */
+  }
+  
+  .button-group {
+    display: flex;  /* Align items in a row */
+  }
+
+  .publish-table button {
+      padding: 1.5px 20px;
+      margin-right: 5px;
+      border: none;
+      background-color: #00a7b3;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: auto;  /* Set a specific width for all buttons */
+      height: 40px;  /* Set a specific height for all buttons */
+  }
+</style>
+
+<h2 style="color: darkorange; text-align: center;">Publish Panel</h2>
+
+<table class="publish-table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Filename</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for file in files %}
+        <tr>
+            <td>{{ file[1] }}</td>  <!-- Assuming file[1] is the username -->
+            <td>{{ file[4] }}</td>  <!-- Assuming file[4] is the filename -->
+            <td>
+                <div class="button-group">
+                    <form method="post" style="display: flex;">
+                        <input type="hidden" name="file_id" value="{{ file[0] }}">  <!-- Assuming file[0] is the file ID -->
+                        <button type="submit" name="action" value="publish">Publish</button>
+                        <!-- <button type="submit" name="action" value="delete">Delete</button> -->
+                    </form>
+                    <form method="post" style="display: flex;">
+                        <input type="hidden" name="file_id" value="{{ file[0] }}">  <!-- Assuming file[0] is the file ID -->
+                        <!-- <button type="submit" name="action" value="publish">Publish</button> -->
+                        <button type="submit" name="action" value="delete">Delete</button>
+                    </form>
+                    <!-- can view file in new tab -->
+                    <!-- <a href="{{ url_for('serve_file', file_id=file[0]) }}" target="_blank">
+                        <button type="button">ViewFile-1</button>
+                    </a> -->
+                        <button type="button" onclick="
+                            var left = (window.screen.width - 1000) / 2;
+                            var top = (window.screen.height - 600) / 2;
+                            window.open('{{ url_for('serve_file', file_id=file[0]) }}', 'popup', 'width=1000,height=600,top=' + top + ',left=' + left);
+                            return false;">ViewFile
+                        </button>
+
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "header.html" %}
+{% block body %}
+
+    <h1>Download Files</h1>
+    {% if filenames %}
+        <ul>
+            {% for filename in filenames %}
+                <a href="{{ url_for('download_file', filename='MCA/' + subject_name + '/' + filename[0]) }}">{{ filename[0] }}</a>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No files found.</p>
+    {% endif %}
+{% endblock %}

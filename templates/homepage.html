@@ -1,0 +1,78 @@
+{% extends "header.html" %}
+{% block body %}
+
+<body>
+  <nav class="navbar">
+    <h1><a >Lumos-Smart Study Material</a></h1>
+    <div class="user-info">
+      <span>Welcome:{{ current_user.username }}</span>
+      <a href="{{ url_for('logout') }}"><button>Logout</button></a>
+      {% if current_user.username == '205121038' %}
+        <a href="{{ url_for('admin_panel') }}"><button>Admin</button></a>
+      {% endif %}
+    </div>
+  </nav>
+
+  
+
+<!-- home -->
+
+<header>
+  <div class="smoothie">
+    <img src="static/lib.jpg" alt="">
+  </div>
+  <div class="headings">
+    <h2>Nitt Papers</h2>
+    <h3>For Nitt Students</h3>
+    <!-- <a href="{{url_for('logout')}}"> <button> Press here to logout</button></a> -->
+  </div>
+</header>
+
+  <!-- smoothies -->
+
+  
+  <ul class="recipes">
+    
+  <li class="recipe">
+    <img src="static/smoothie.png" alt="smoothie recipe icon" >
+    <a href="{{url_for('mca')}}">
+      <button class="button">
+          MCA-MAster Of Computer Application
+      </button>
+    </a>
+  </li>
+  
+  <li class="recipe">
+    <img src="static/smoothie.png" alt="smoothie recipe icon">
+    <h4>B.Tech.</h4>
+    <p>Bachlor of Technology</p>
+  </li>
+
+  <li class="recipe">
+    <img src="static/smoothie.png" alt="smoothie recipe icon">
+    <h4>M. Tech.</h4>
+    <p>Master Of Technology</p>
+  </li>
+
+
+  <li class="recipe">
+    <img src="static/smoothie.png" alt="smoothie recipe icon" >
+    <h4>BBA</h4>
+    <p>Bachlor Of Business Administration</p>
+  </li>
+  
+  <li class="recipe">
+    <img src="static/smoothie.png" alt="smoothie recipe icon">
+    <h4>MBA</h4>
+    <p>Master Of Business Administration</p>
+  </li>
+
+  <li class="recipe">
+    <img src="static/smoothie.png" alt="smoothie recipe icon">
+    <h4>M.Sc.</h4>
+    <p>Master Of Science</p>
+  </li>
+
+</body>
+
+{% endblock %}

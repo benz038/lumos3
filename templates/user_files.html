@@ -1,0 +1,9 @@
+{% extends "header.html" %}
+{% block body %}
+<h2>Files for {{ username }}</h2>
+<ul>
+    {% for file in files %}
+    <li><a href="{{ url_for('static', filename=file) }}">{{ file }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

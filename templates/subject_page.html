@@ -1,0 +1,81 @@
+{% extends "header.html" %}
+{% block body %}
+
+<style>
+    /* Card container */
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 150px;
+      border: 5px solid #d3940ddc;
+      border-radius: 15px;
+      padding: 30px;
+      margin-top: 50px; /* Add top margin */
+    }
+
+    /* Card title link */
+    .card a {
+      font-size: 14px;
+      font-weight: bold;
+      color: #232323;
+      text-decoration: none;
+    }
+
+    .card a:hover {
+      text-decoration: underline;
+    }
+
+    /* Download button */
+    .card button {
+      background-color: #e37927;
+      color: #974646;
+      border: none;
+      border-radius: 15px;
+      padding: 2px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .card button:hover {
+      background-color: #17b580;
+    }
+
+    .card button a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .card button a:hover {
+      text-decoration: auto;
+    }
+
+    /* Grid container */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-gap: 30px;
+      justify-items: left;
+    }
+</style>
+
+<body>
+
+    <nav class="navbar1">
+        <h1> {{ subject_name}} </h1>
+    </nav>
+  
+    <div class="grid-container">
+      {% for file in files %}
+        <li class="card">
+          <a>{{ file }}</a>
+          <button>
+            <a href="{{ url_for('download_file', filename='MCA/' + subject_name + '/' + file) }}" download>Download</a>
+          </button>
+        </li>
+      {% endfor %}
+    </div>
+
+</body>
+{% endblock %}
