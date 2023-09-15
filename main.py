@@ -37,7 +37,7 @@ logger.addHandler(file_handler)
 # Dauth configuration
 DAUTH_CLIENT_ID = "kYsE8Z7gKhwpjrRQ"
 DAUTH_CLIENT_SECRET = "JcUl7AqXe.WvXzNmE6ilS.ukIk~jFxQX"
-DAUTH_REDIRECT_URI = "http://localhost:8000/callback"
+DAUTH_REDIRECT_URI = "http://165.232.188.128:8000/callback"
 DAUTH_AUTHORIZE_URL = "https://auth.delta.nitt.edu/authorize"
 DAUTH_TOKEN_URL = "https://auth.delta.nitt.edu/api/oauth/token"
 DAUTH_USER_URL = "https://auth.delta.nitt.edu/api/resources/user"
@@ -220,7 +220,7 @@ def admin_panel():
 # request upload routes
 
 @app.route('/request_upload', methods=['GET', 'POST'])
-@login_required
+#@login_required
 @session_validation_required
 def request_upload():
     current_user.request_status = 'request'
@@ -234,7 +234,7 @@ def allowed_file(filename):
  return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/upload')
-@login_required
+#@login_required
 @session_validation_required
 def upload_form():
     if current_user.upload_access != 'accept' and current_user.username != '205121038':
@@ -254,7 +254,7 @@ TEMP_UPLOAD_FOLDER = 'temp_uploads'
 app.config['TEMP_UPLOAD_FOLDER'] = TEMP_UPLOAD_FOLDER
 
 @app.route('/upload', methods=['POST'])
-@login_required
+#@login_required
 @session_validation_required
 def upload_file():
     if current_user.upload_access != 'accept' and current_user.username != '205121038':
@@ -361,7 +361,7 @@ def publish_panel():
 from flask import send_file
 
 @app.route('/preview_file/<file_id>')
-@login_required
+#@login_required
 @session_validation_required
 def preview_file(file_id):
     # Retrieve the file data from the database using the file ID
@@ -386,7 +386,7 @@ def preview_file(file_id):
     return render_template('preview_file.html', file_path=url_for('serve_file', file_id=file_id), filename=filename)
 
 @app.route('/serve_file/<file_id>')
-@login_required
+#@login_required
 @session_validation_required
 def serve_file(file_id):
     # Retrieve the file data from the database using the file ID
@@ -405,7 +405,7 @@ def serve_file(file_id):
 
 
 @app.route('/static/<path:filename>')
-@login_required
+#@login_required
 @session_validation_required
 def download_file(filename):
     return send_from_directory('static', filename, as_attachment=True)
@@ -417,7 +417,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/mca')
-@login_required
+#@login_required
 @session_validation_required
 def mca():
     subjects = [
@@ -456,7 +456,7 @@ def mca():
 
 
 @app.route('/subject/<subject_name>')
-@login_required
+#@login_required
 @session_validation_required
 def subject_page(subject_name):
     subject_path = os.path.join(app.config['UPLOAD_FOLDER'], 'MCA',subject_name)
@@ -466,7 +466,7 @@ def subject_page(subject_name):
 
 
 @app.route('/about')  # decorator defines the
-@login_required
+#@login_required
 @session_validation_required
 def about():
     return render_template('about.html', name= "Deepak")
